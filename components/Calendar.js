@@ -41,6 +41,7 @@ export default class Calendar extends Component {
     titleFormat: PropTypes.string,
     today: PropTypes.any,
     weekStart: PropTypes.number,
+    isDateActive: PropTypes.func,
   };
 
   static defaultProps = {
@@ -56,7 +57,7 @@ export default class Calendar extends Component {
     startDate: moment().format('YYYY-MM-DD'),
     titleFormat: 'MMMM YYYY',
     today: moment(),
-    weekStart: 1,
+    weekStart: 1
   };
 
   componentDidMount() {
@@ -94,7 +95,12 @@ export default class Calendar extends Component {
 
   selectDate(date) {
     this.setState({ selectedMoment: date });
-    this.props.onDateSelect && this.props.onDateSelect(date.format());
+    if (isDateActive(date))
+      this.props.onDateSelect && this.props.onDateSelect(date.format());
+  }
+
+  isDateActive(date) {
+    return ((this.props.isDateActive && this.props.isDateActive(date)) || true);
   }
 
   onPrev = () => {

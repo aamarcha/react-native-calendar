@@ -94,13 +94,16 @@ export default class Calendar extends Component {
   }
 
   selectDate(date) {
+    if (!this.isDateActive(date))
+      return;
     this.setState({ selectedMoment: date });
-    if (isDateActive(date))
-      this.props.onDateSelect && this.props.onDateSelect(date.format());
+    this.props.onDateSelect && this.props.onDateSelect(date.format());
   }
 
   isDateActive(date) {
-    return ((this.props.isDateActive && this.props.isDateActive(date)) || true);
+    if (this.props.isDateActive) 
+      return this.props.isDateActive(date);
+    return true;
   }
 
   onPrev = () => {
@@ -163,13 +166,14 @@ export default class Calendar extends Component {
       const isoWeekday = (renderIndex + weekStart) % 7;
 
       if (dayIndex >= 0 && dayIndex < argMonthDaysCount) {
+        let UTCdate = moment(startOfArgMonthMoment).set('date', dayIndex + 1);
         days.push((
           <Day
             startOfMonth={startOfArgMonthMoment}
-            isWeekend={isoWeekday === 0 || isoWeekday === 6}
+            isWeekend={!this.isDateActive(UTCdate)}
             key={`${renderIndex}`}
             onPress={() => {
-              this.selectDate(moment(startOfArgMonthMoment).set('date', dayIndex + 1));
+              this.selectDate(UTCdate);
             }}
             caption={`${dayIndex + 1}`}
             isToday={argMonthIsToday && (dayIndex === todayIndex)}

@@ -17,7 +17,7 @@ export default class Day extends Component {
     caption: PropTypes.any,
     customStyle: PropTypes.object,
     filler: PropTypes.bool,
-    hasEvent: PropTypes.bool,
+    hasEvent: PropTypes.object,
     isSelected: PropTypes.bool,
     isToday: PropTypes.bool,
     isWeekend: PropTypes.bool,

@@ -83,12 +83,12 @@ export default class Calendar extends Component {
     const parsedDates = {};
 
     eventDates.forEach(event => {
-      const date = moment(event);
+      const date = moment(event.date);
       const month = moment(date).startOf('month').format();
       if (!parsedDates[month]) {
         parsedDates[month] = {};
       }
-      parsedDates[month][date.date() - 1] = true;
+      parsedDates[month][date.date() - 1] = event.indicatorStyle ? {...event.indicatorStyle} : true;
     })
     return parsedDates;
   }
@@ -178,7 +178,7 @@ export default class Calendar extends Component {
             caption={`${dayIndex + 1}`}
             isToday={argMonthIsToday && (dayIndex === todayIndex)}
             isSelected={selectedMonthIsArg && (dayIndex === selectedIndex)}
-            hasEvent={events && events[dayIndex] === true}
+            hasEvent={events && events[dayIndex]}
             usingEvents={this.props.eventDates.length > 0}
             customStyle={this.props.customStyle}
           />

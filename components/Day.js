@@ -87,7 +87,8 @@ export default class Day extends Component {
               styles.eventIndicatorFiller,
               customStyle.eventIndicatorFiller,
               hasEvent && styles.eventIndicator,
-              hasEvent && customStyle.eventIndicator]}
+              hasEvent && customStyle.eventIndicator,
+              hasEvent]}
             />
           }
         </View>

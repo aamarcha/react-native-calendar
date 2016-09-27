@@ -83,12 +83,12 @@ export default class Calendar extends Component {
     const parsedDates = {};
 
     eventDates.forEach(event => {
-      const date = moment(event.date);
+      const date = moment(event && event.date ? event.date : event);
       const month = moment(date).startOf('month').format();
       if (!parsedDates[month]) {
         parsedDates[month] = {};
       }
-      parsedDates[month][date.date() - 1] = event.indicatorStyle ? {...event.indicatorStyle} : true;
+      parsedDates[month][date.date() - 1] = event && event.indicatorStyle ? {...event.indicatorStyle} : {};
     })
     return parsedDates;
   }

@@ -94,8 +94,6 @@ export default class Calendar extends Component {
   }
 
   selectDate(date) {
-    if (!this.isDateActive(date))
-      return;
     this.setState({ selectedMoment: date });
     this.props.onDateSelect && this.props.onDateSelect(date.format());
   }

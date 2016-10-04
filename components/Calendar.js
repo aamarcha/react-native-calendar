@@ -27,13 +27,13 @@ export default class Calendar extends Component {
     dayHeadings: PropTypes.array,
     eventDates: PropTypes.array,
     monthNames: PropTypes.array,
-    nextButtonText: PropTypes.string,
+    nextButton: PropTypes.object,
     onDateSelect: PropTypes.func,
     onSwipeNext: PropTypes.func,
     onSwipePrev: PropTypes.func,
     onTouchNext: PropTypes.func,
     onTouchPrev: PropTypes.func,
-    prevButtonText: PropTypes.string,
+    prevButton: PropTypes.object,
     scrollEnabled: PropTypes.bool,
     selectedDate: PropTypes.any,
     showControls: PropTypes.bool,
@@ -50,8 +50,8 @@ export default class Calendar extends Component {
     eventDates: [],
     monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    nextButtonText: 'Next',
-    prevButtonText: 'Prev',
+    nextButton: <Text style={styles.controlButtonText}>Next</Text>,
+    prevButton: <Text style={styles.controlButtonText}>Prev</Text>,
     scrollEnabled: false,
     showControls: false,
     startDate: moment().format('YYYY-MM-DD'),
@@ -235,9 +235,7 @@ export default class Calendar extends Component {
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onPrev}
           >
-            <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
-              {this.props.prevButtonText}
-            </Text>
+            {this.props.prevButton}
           </TouchableOpacity>
           <Text style={[styles.title, this.props.customStyle.title]}>
             {localizedMonth} {this.state.currentMonthMoment.year()}
@@ -246,9 +244,7 @@ export default class Calendar extends Component {
             style={[styles.controlButton, this.props.customStyle.controlButton]}
             onPress={this.onNext}
           >
-            <Text style={[styles.controlButtonText, this.props.customStyle.controlButtonText]}>
-              {this.props.nextButtonText}
-            </Text>
+            {this.props.nextButton}
           </TouchableOpacity>
         </View>
       )

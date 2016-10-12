@@ -106,13 +106,13 @@ export default class Calendar extends Component {
 
   onPrev = () => {
     const newMoment = moment(this.state.currentMonthMoment).subtract(1, 'month');
-    this.setState({ currentMonthMoment: newMoment });
+    this.setState({ currentMonthMoment: newMoment, selectedMoment: null });
     this.props.onTouchPrev && this.props.onTouchPrev(newMoment);
   }
 
   onNext = () => {
     const newMoment = moment(this.state.currentMonthMoment).add(1, 'month');
-    this.setState({ currentMonthMoment: newMoment });
+    this.setState({ currentMonthMoment: newMoment, selectedMoment: null });
     this.props.onTouchNext && this.props.onTouchNext(newMoment);
   }
 
